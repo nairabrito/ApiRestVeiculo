@@ -14,11 +14,14 @@ public class VeiculoService {
 	}
 	
 	public Veiculo salvar(Veiculo veiculo) {
-		return veiculoRepository.save(veiculo);
+		Veiculo addVeiculo = veiculoRepository.save(veiculo);	
+		addVeiculo.rodizioAtivo();
+		addVeiculo.diaRodizio();;
+		return addVeiculo;
 	}
-	
-	public List<Veiculo> getVeiculoUsuario(Long idUsuario) {
-		List<Veiculo> veiculoList = getVeiculoUsuario(idUsuario);
+
+	public List<Veiculo> listaVeiculosUsuario(String cpf) {
+		List<Veiculo> veiculoList = veiculoRepository.findByCPF(cpf);
 		for (Veiculo veiculo : veiculoList) {
 			veiculo.rodizioAtivo();
 			veiculo.diaRodizio();

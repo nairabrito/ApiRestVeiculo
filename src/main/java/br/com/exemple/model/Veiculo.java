@@ -3,12 +3,9 @@ package br.com.exemple.model;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
@@ -52,13 +49,15 @@ public class Veiculo {
 	@JsonProperty("TipoVeiculo")
 	private int tipoVeiculo;
 	
+	private String CPF;
+	
 	@Transient
 	private String diaRodizio;
 	
 	@Transient
 	private boolean rodizioAtivo;
 	
-	public Veiculo(String valor, String marca, String modelo, String anoModelo, String codigoFipe, int tipoVeiculo) {
+	public Veiculo(String valor, String marca, String modelo, String anoModelo, String codigoFipe, int tipoVeiculo, String cpf) {
 		super();
 		this.valor = valor;
 		this.marca = marca;
@@ -66,6 +65,10 @@ public class Veiculo {
 		this.anoModelo = anoModelo;
 		this.codigoFipe = codigoFipe;
 		this.tipoVeiculo = tipoVeiculo;
+		CPF = cpf;
+		this.rodizioAtivo();
+		this.diaRodizio();
+		
 	}
 	
 	public void diaRodizio() {
@@ -118,9 +121,5 @@ public class Veiculo {
 		    	this.rodizioAtivo = false;
 		}
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
-	private Usuario usuario;
-
 	
 }

@@ -40,7 +40,4 @@ public class Usuario {
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
-	private Set<Veiculo> veiculo;
 }

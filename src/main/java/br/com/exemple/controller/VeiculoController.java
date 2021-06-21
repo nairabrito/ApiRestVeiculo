@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.exemple.error.HttpResponse;
+import br.com.exemple.model.Usuario;
 import br.com.exemple.model.Veiculo;
 import br.com.exemple.service.FipeService;
 import br.com.exemple.service.VeiculoService;
@@ -39,13 +40,12 @@ public class VeiculoController {
 		return new ResponseEntity<>((veiculo), HttpStatus.CREATED);
     }
 	
-	@GetMapping(value = "/{id}")
-	public HttpResponse getVeiculoUsuario(@RequestBody Veiculo veiculo) {
+	@GetMapping(value = "/lista")
+	public HttpResponse listaVeiculosUsuario(@RequestBody Usuario usuario) {
 		try {
-			return new HttpResponse(HttpStatus.OK, veiculoService.getVeiculoUsuario(veiculo.getUsuario().getIdUsuario()));
+			return new HttpResponse(HttpStatus.OK, veiculoService.listaVeiculosUsuario(usuario.getCpf()));
 		} catch (Exception ex) {
-			return new HttpResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Erro na busca");
+			return new HttpResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Erro na procura");
 		}
 	}
-	
 }
